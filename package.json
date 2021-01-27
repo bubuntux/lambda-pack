@@ -1,27 +1,27 @@
 {
-  "name": "npm-pack-zip",
-  "version": "1.2.7",
+  "name": "lambda-pack",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mwasplund/npm-pack-zip.git"
+    "url": "https://github.com/bubuntux/lambda-pack.git"
   },
   "scripts": {
-    "test": "node bin/npm-pack-zip.js"
+    "test": "node bin/lambda-pack.js"
   },
   "dependencies": {
     "archiver-promise": "^1.0.0",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^9.1.0",
     "mz": "^2.7.0",
-    "npm-packlist": "^1.1.10",
-    "sanitize-filename": "^1.6.1",
-    "yargs": "^11.0.0"
+    "npm-packlist": "^2.1.4",
+    "sanitize-filename": "^1.6.3",
+    "yargs": "^16.2.0"
   },
   "author": {
     "name": "Merlin Taylor",
     "email": "code.merlin.taylor@gmail.com"
   },
   "bin": {
-    "npm-pack-zip": "bin/npm-pack-zip.js"
+    "lambda-pack": "bin/lambda-pack.js"
   },
   "description": "Run npm pack to generate a .zip archive file",
   "eslintConfig": {
@@ -36,7 +36,7 @@
   },
   "keywords": [
     "pack",
-    "azure",
+    "lambda-layer",
     "lambda",
     "zip"
   ],
@@ -44,9 +44,8 @@
   "main": "index.js",
   "maintainers": [
     {
-      "name": "merlin-taylor",
-      "email": "code.merlin.taylor@gmail.com"
+      "name": "Julio Gutierrez",
+      "email": "bubuntux@gmail.com"
     }
-  ],
-  "readme": "ERROR: No README data found!"
+  ]
 }
