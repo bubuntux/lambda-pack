@@ -44,6 +44,9 @@ function pack(source, destination, layer, verbose) {
         .then(files => {
             return getPackageName(source)
                 .then(packageName => {
+                    if (destination && !fs.pathExistsSync(destination)){
+                        fs.mkdirpSync(destination);
+                    }
                     const target = path.join(destination, `${sanitize(packageName)}.zip`);
                     const zip = zipFiles(packageName, target, source, files, layer, verbose);
                     return zip.then(_ => {
