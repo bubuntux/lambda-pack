@@ -25,7 +25,7 @@ npm install
 Modify _my-lambda/package.json_:
 ```
 "scripts": {
-    "pack": "@bubuntux/lambda-pack"
+    "pack": "lambda-pack"
     ...
 }
 ```
