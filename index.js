@@ -6,14 +6,12 @@ const packlist = require('npm-packlist');
 const fs = require('fs-extra');
 const path = require('path');
 
-function zipFiles(packageName, files, filename, source, destination, layer, info, verbose) {
-    const target = path.join(destination, filename);
-    if (info)
-        console.log(`Archive: ${target}`);
-
-    let archive = archiver(target);
+function zipFiles(packageName, target, source, files, layer, verbose) {
+    const archive = archiver(target);
+    if (verbose) {
+        console.log(`Creating zip: ${target}`);
+    }
     files.forEach(file => {
-        const filePath = path.join(source, file);
         let prefix = '';
         if (layer) {
             prefix = 'nodejs/';
@@ -22,8 +20,8 @@ function zipFiles(packageName, files, filename, source, destination, layer, info
             }
         }
         if (verbose)
-            console.log(file);
-        archive.file(filePath, {name: file, prefix});
+            console.log(`${prefix}${file}`);
+        archive.file(path.join(source, file), {name: file, prefix});
     });
     return archive.finalize();
 }
@@ -38,16 +36,18 @@ function getPackageInfo(packageFile) {
 
 function getPackageName(cwd) {
     const packageFile = path.join(cwd, 'package.json');
-    return getPackageInfo(packageFile).then(packageInfo => packageInfo.name)/*.then(packageInfo => `${sanitize(packageInfo.name)}.zip`)*/;
+    return getPackageInfo(packageFile).then(packageInfo => packageInfo.name);
 }
 
-function pack(source, destination, layer, info, verbose) {
+function pack(source, destination, layer, verbose) {
     return packlist({path: source})
         .then(files => {
             return getPackageName(source)
                 .then(packageName => {
-                    const filename = `${sanitize(packageName)}.zip`;
-                    return zipFiles(packageName, files, filename, source, destination, layer, info, verbose);
+                    const target = path.join(destination, `${sanitize(packageName)}.zip`);
+                    const zip = zipFiles(packageName, target, source, files, layer, verbose);
+                    console.log(`Wrote zip to ${source}${target}`)
+                    return zip;
                 });
         });
 }

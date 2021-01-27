@@ -6,7 +6,7 @@ This project uses the npm-packlist project to build up the list of files to incl
 
 ## Installation
 
-`npm install --save-dev lambda-pack`
+`npm install --save-dev @bubuntux/lambda-pack`
 
 ## Example
 
@@ -14,7 +14,7 @@ _my-lambda_ is an npm package I want to run as an AWS Lambda Function.
 
 Install _pack-zip_ locally in _my-lambda_
 ```
-npm install --save-dev lambda-pack
+npm install --save-dev @bubuntux/lambda-pack
 ```
 
 Install any runtime dependencies of _my-lambda_.
@@ -25,7 +25,7 @@ npm install
 Modify _my-lambda/package.json_:
 ```
 "scripts": {
-    "pack": "lambda-pack"
+    "pack": "@bubuntux/lambda-pack"
     ...
 }
 ```
@@ -37,7 +37,7 @@ npm run pack
 
 ## Creating a layer
 
-Using the argument `--layer true` the zip will have the following structure
+Using the argument `--layer` the zip will have the following structure
 
 ```
  package.zip 
