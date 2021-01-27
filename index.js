@@ -46,8 +46,9 @@ function pack(source, destination, layer, verbose) {
                 .then(packageName => {
                     const target = path.join(destination, `${sanitize(packageName)}.zip`);
                     const zip = zipFiles(packageName, target, source, files, layer, verbose);
-                    console.log(`Wrote zip to ${source}${target}`)
-                    return zip;
+                    return zip.then(_ => {
+                        console.log(`Wrote zip to ${source}${target}`)
+                    });
                 });
         });
 }
